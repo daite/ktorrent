@@ -81,6 +81,16 @@ mod tests {
         )
     }
     #[test]
+    fn test_get_get_bbs_url_for_torrentsir() {
+        let search_doc = Document::from(include_str!("./test_data/torrentsir_search.html"));
+        let data = scrape::get_data_by_class_name(
+            &search_doc, "media-heading", "a", "href")[0];
+        assert_eq!(
+            "./board.php?bo_table=entertain&wr_id=18170",
+            data,
+        );
+    }
+    #[test]
     fn test_get_magnet_for_torrentj() {
         let bbs_doc = Document::from(include_str!("./test_data/torrentj_bbs.html"));
         let data = scrape::get_data_by_class_name(
@@ -100,6 +110,16 @@ mod tests {
         )
     }
     #[test]
+    fn test_get_get_bbs_url_for_torrentj() {
+        let search_doc = Document::from(include_str!("./test_data/torrentj_search.html"));
+        let data = scrape::get_data_by_class_name(
+            &search_doc, "media-heading", "a", "href")[0];
+        assert_eq!(
+            "./board.php?bo_table=entertain&wr_id=18172",
+            data,
+        );
+    }
+    #[test]
     fn test_get_title_for_torrentview() {
         let search_doc = Document::from(include_str!("./test_data/torrentview_search.html"));
         let data = scrape::get_data_by_tag_name(&search_doc, "b", "sch_word");
@@ -115,6 +135,16 @@ mod tests {
             &bbs_doc, "list-group", "a", "href")[1];
         assert_eq!(
             "magnet:?xt=urn:btih:27646d3df274ed51b6386bd6aa40da849a73b341",
+            data,
+        );
+    }
+    #[test]
+    fn test_get_get_bbs_url_for_torrentview() {
+        let search_doc = Document::from(include_str!("./test_data/torrentview_search.html"));
+        let data = scrape::get_data_by_class_name(
+            &search_doc, "media-heading", "a", "href")[0];
+        assert_eq!(
+            "./board.php?bo_table=enter&wr_id=21971",
             data,
         );
     }
@@ -138,6 +168,16 @@ mod tests {
         );
     }
     #[test]
+    fn test_get_get_bbs_url_for_tshare() {
+        let search_doc = Document::from(include_str!("./test_data/tshare_search.html"));
+        let data = scrape::get_data_by_class_name(
+            &search_doc, "list-item-row", "a", "href")[0];
+        assert_eq!(
+            "https://tshare.org/movie/11565",
+            data,
+        );
+    }
+    #[test]
     fn test_get_title_for_torrentmobile() {
         let search_doc = Document::from(include_str!("./test_data/torrentmobile_search.html"));
         let data = scrape::get_data_by_tag_name(&search_doc, "b", "sch_word");
@@ -157,6 +197,16 @@ mod tests {
         );
     }
     #[test]
+    fn test_get_get_bbs_url_for_torrentmobile() {
+        let search_doc = Document::from(include_str!("./test_data/torrentmobile_search.html"));
+        let data = scrape::get_data_by_class_name(
+            &search_doc, "media-heading", "a", "href")[0];
+        assert_eq!(
+            "./board.php?bo_table=music&wr_id=50564",
+            data,
+        );
+    }
+    #[test]
     fn test_get_title_for_ttobogo() {
         let search_doc = Document::from(include_str!("./test_data/ttobogo_search.html"));
         let data = &scrape::get_data_by_only_class_name(&search_doc, "subject")[0];
@@ -172,6 +222,16 @@ mod tests {
             &bbs_doc, "td", "btn btn-blue", "onclick")[0];
         assert_eq!(
             "file_download(\'magnet:?xt=urn:btih:27646d3df274ed51b6386bd6aa40da849a73b341\')",
+            data,
+        );
+    }
+    #[test]
+    fn test_get_get_bbs_url_for_ttobogo() {
+        let search_doc = Document::from(include_str!("./test_data/ttobogo_search.html"));
+        let data = &scrape::get_data_by_tag_name_with(
+            &search_doc, "div", "subject", "href")[0];
+        assert_eq!(
+            "https://www1.ttobogo.net/post/192852",
             data,
         );
     }
