@@ -3,9 +3,11 @@ use select::predicate::{Class, Name};
 
 pub mod scrape {
     use super::*;
-    pub fn get_data_by_class_name<'a>(
-        doc: &'a Document, class_name: &'a str, 
-        tag_name: &'a str, attr_name: &'a str) -> Vec<&'a str> {     
+    pub fn get_data_by_class_name<'a> (
+        doc: &'a Document, 
+        class_name: &'a str, 
+        tag_name: &'a str,
+        attr_name: &'a str) -> Vec<&'a str> {
         let mut data = vec![];
         for node in doc.find(Class(class_name)) {
             let val = node.find(Name(tag_name))
@@ -18,8 +20,9 @@ pub mod scrape {
         data
     }
     pub fn get_data_by_tag_name(
-        doc: &Document, tag_name: &str, class_name: &str
-        ) -> Vec<String> {
+        doc: &Document, 
+        tag_name: &str, 
+        class_name: &str) -> Vec<String> {
         let mut data = vec![];
         for node in doc.find(Name(tag_name)) {
             for n in node.children() {
@@ -33,7 +36,8 @@ pub mod scrape {
         data
     }
     pub fn get_data_by_only_class_name<'a>(
-        doc: &'a Document, class_name: &'a str) -> Vec<String> {     
+        doc: &'a Document, 
+        class_name: &'a str) -> Vec<String> {     
         let mut data = vec![];
         for node in doc.find(Class(class_name)) {
             data.push(node.text());     
@@ -41,9 +45,10 @@ pub mod scrape {
         data
     }
     pub fn get_data_by_tag_name_with(
-        doc: &Document, tag_name: &str,
-        class_name: &str, attr_name: &str,
-        ) -> Vec<String> {
+        doc: &Document, 
+        tag_name: &str,
+        class_name: &str, 
+        attr_name: &str) -> Vec<String> {
         let mut data = vec![];
         for node in doc.find(Name(tag_name)) {
             for n in node.children() {
@@ -232,6 +237,34 @@ mod tests {
             &search_doc, "div", "subject", "href")[0];
         assert_eq!(
             "https://www1.ttobogo.net/post/192852",
+            data,
+        );
+    }
+    #[test]
+    fn test_get_title_for_torrentsee() {
+        let search_doc = Document::from(include_str!("./test_data/torrentsee_search.html"));
+        let data = scrape::get_data_by_only_class_name(&search_doc, "tit");
+        assert_eq!(
+            "동상이몽2너는내운명.E138.200323.720p-NEXT",
+            data[1].trim(),
+        )
+    }
+    #[test]
+    fn test_get_magnet_torrentsee() {
+        let bbs_doc = Document::from(include_str!("./test_data/torrentsee_bbs.html"));
+        let data = &scrape::get_data_by_tag_name(
+            &bbs_doc, "td", "bbs_btn2")[1];
+        assert_eq!(
+            "magnet:?xt=urn:btih:eee4d6fdf36ba112523cc48315ac5300cd84c77f",
+            data.trim(),
+        );
+    }
+    #[test]
+    fn test_get_get_bbs_url_for_torrentsee() {
+        let search_doc = Document::from(include_str!("./test_data/torrentsee_search.html"));
+        let data = scrape::get_data_by_class_name(&search_doc, "tit", "a", "href")[0];
+        assert_eq!(
+            "/topic/106593",
             data,
         );
     }
