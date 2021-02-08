@@ -63,3 +63,5 @@ pub async fn get_data(search_words: &str) -> Result<Vec<(String, String)>, Box<d
     Ok(data)
 }
 ```
+## Output
+![image](https://raw.githubusercontent.com/daite/ktorrent-rs/main/images/sample.png)
