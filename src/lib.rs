@@ -355,4 +355,31 @@ mod tests {
             data[0],
         );
     }
+    #[test]
+    fn test_get_title_for_torrenttip() {
+        let search_doc = Document::from(include_str!("./test_data/torrenttip_search.html"));
+        let data = find_all_text_by_class(&search_doc, "tit");
+        assert_eq!(
+            "동상이몽2너는내운명.E138.200323.720p-NEXT",
+            data[1].trim(),
+        );
+    }
+    #[test]
+    fn test_get_magnet_torrenttip() {
+        let bbs_doc = Document::from(include_str!("./test_data/torrenttip_bbs.html"));
+        let data = &find_all_text_by_tag(&bbs_doc, "tr", "td")[3];
+        assert_eq!(
+            "magnet:?xt=urn:btih:53eccf3d953162d55ecbd698558beb927767a264",
+            data.trim(),
+        );
+    }
+    #[test]
+    fn test_get_get_bbs_url_for_torrenttip() {
+        let search_doc = Document::from(include_str!("./test_data/torrenttip_search.html"));
+        let data = find_child_attr_by_tag(&search_doc, "body", "a", "href");
+        assert_eq!(
+            "/topic/87009",
+            data[0],
+        );
+    }
 }

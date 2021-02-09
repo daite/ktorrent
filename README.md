@@ -37,4 +37,5 @@ fn main() {
 |  6 | torrentsir   | https://torrentsir31.com |    O   |
 |  7 | torrentj   | https://torrentj32.com |    O   |
 |  8 | torrentqq   | https://torrentqq73.com |    O   |
+|  9 | torrenttip   | https://torrenttip19.com |    O   |
 
