@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.com/daite/ktorrent.svg?branch=main)](https://travis-ci.com/daite/ktorrent)
 [![docs](https://docs.rs/ktorrent/badge.svg)](https://docs.rs/ktorrent)
 # ktorrent
-> collect test data for scraping korean torrent sites.
+> Scraping korean torrent sites.
 # Example
 ```rust
 use reqwest;
