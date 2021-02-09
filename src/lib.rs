@@ -1,7 +1,10 @@
+//! # ktorrent
+//! 
+//! * ktorrent crate is only for scraping korean torrent sites.
+//! * it can get any data for links, titles, and magnet by scraping the sites.
 pub use select::document::Document;
 pub use select::predicate::{Class, Name};
-pub use scrape::*;
-
+pub use self::scrape::*;
 /// # Example
 /// ```
 /// let file_doc = include_str!("./test_data/torrentsir_bbs.html");
@@ -16,7 +19,7 @@ pub mod scrape {
     use super::*;
     /// it collects a child attribute by a child tag name.
     /// # html example
-    /// ```
+    /// ```html
     /// <li class="p_class_name">
     ///     <i class="XXXX"></i> 
     ///     <c_tag_name c_attr_name=attribute>xxx</a>
@@ -41,7 +44,7 @@ pub mod scrape {
     }
     /// it collects a text from a parent node which has a class name of a child.
     /// # html example
-    /// ```
+    /// ```html
     /// <b>
     ///   <b class="c_class_name">child_text</b>
     ///   parent_text
@@ -66,7 +69,7 @@ pub mod scrape {
     }
     /// it collects all texts by a class name.
     /// # html example
-    /// ```
+    /// ```html
     /// <b>
     ///   <a href="XX" class=class_name title="XXXX">text</a>
     /// </b>
@@ -83,7 +86,7 @@ pub mod scrape {
     }
     /// it collects a child attribute by a child class name.
     /// # html example
-    /// ```
+    /// ```html
     /// <td>
     ///   <a class="c_class_name" href="XXXX" onclick=XXXX>
     ///   <span class="fa fa-cloud-download"></span>
