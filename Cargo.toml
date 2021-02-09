@@ -4,6 +4,10 @@ version = "0.1.0"
 authors = ["daite <blueskykind02@yahoo.co.jp>"]
 edition = "2018"
 description = "ktorrent crate is only for scraping korean torrent sites"
+documentation = ""
+homepage = "https://daite.github.io"
+repository = "https://github.com/daite"
+readme = "README.md"
 license = "MIT"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
