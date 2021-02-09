@@ -4,9 +4,9 @@ pub use scrape::*;
 
 /// # Example
 /// ```
-/// let bbs_doc = ktorrent::Document::from(include_str!("./test_data/torrentsir_bbs.html"));
-/// let data = ktorrent::find_child_attr_by_tag(
-///    &bbs_doc, "list-group", "a", "href")[1];
+/// let file_doc = include_str!("./test_data/torrentsir_bbs.html");
+/// let bbs_doc = ktorrent::Document::from(file_doc);
+/// let data = ktorrent::find_child_attr_by_tag(&bbs_doc, "list-group", "a", "href")[1];
 ///  assert_eq!(
 ///     "magnet:?xt=urn:btih:27646d3df274ed51b6386bd6aa40da849a73b341",
 ///      data,
@@ -15,10 +15,13 @@ pub use scrape::*;
 pub mod scrape {
     use super::*;
     /// it collects a child attribute by a child tag name.
+    /// # html example
+    /// ```
     /// <li class="p_class_name">
-    ///     <i class="c_class_name"></i> 
-    ///     <c_tag_name c_attr_name=c_attr_name>xxx</a>
+    ///     <i class="XXXX"></i> 
+    ///     <c_tag_name c_attr_name=attribute>xxx</a>
     /// </li>
+    /// ```
     pub fn find_child_attr_by_tag<'a> (
         doc: &'a Document, 
         p_class_name: &'a str, 
@@ -36,10 +39,13 @@ pub mod scrape {
         data
     }
     /// it collects a text from a parent node which has a class name of a child.
+    /// # html example
+    /// ```
     /// <b>
-    /// <b class="c_class_name">child_text</b>
-    /// parent_text
+    ///   <b class="c_class_name">child_text</b>
+    ///   parent_text
     /// </b>
+    /// ```
     pub fn find_parent_text(
         doc: &Document, 
         p_tag_name: &str, 
@@ -57,9 +63,12 @@ pub mod scrape {
         data
     }
     /// it collects all texts by a class name.
-    /// <a href="XX" class=class_name title="XXXX">text</a>
-    /// parent_text
+    /// # html example
+    /// ```
+    /// <b>
+    ///   <a href="XX" class=class_name title="XXXX">text</a>
     /// </b>
+    /// ```
     pub fn find_all_text_by_class<'a>(
         doc: &'a Document, 
         class_name: &'a str) -> Vec<String> {     
@@ -70,14 +79,17 @@ pub mod scrape {
         data
     }
     /// it collects a child attribute by a child class name.
+    /// # html example
+    /// ```
     /// <td>
-    /// <a class="class_name" href="XXXX" onclick=XXXX>
-    /// <span class="fa fa-cloud-download"></span>
-    /// </a>
-    /// <a class="class_name" href="XXXX onclick="XXXX rel="XXXX">
-    /// <span class="fa fa-magnet"></span>
-    /// </a>
+    ///   <a class="c_class_name" href="XXXX" onclick=XXXX>
+    ///   <span class="fa fa-cloud-download"></span>
+    ///   </a>
+    ///   <a class="c_class_name" href="XXXX onclick="XXXX rel="XXXX">
+    ///   <span class="fa fa-magnet"></span>
+    ///   </a>
     /// </td>
+    /// ```
     pub fn find_child_attr_by_class(
         doc: &Document, 
         p_tag_name: &str,
