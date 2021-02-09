@@ -26,7 +26,8 @@ pub mod scrape {
         doc: &'a Document, 
         p_class_name: &'a str, 
         c_tag_name: &'a str,
-        c_attr_name: &'a str) -> Vec<&'a str> {
+        c_attr_name: &'a str
+    ) -> Vec<&'a str> {
         let mut data = vec![];
         for node in doc.find(Class(p_class_name)) {
             let val = node.find(Name(c_tag_name))
@@ -49,7 +50,8 @@ pub mod scrape {
     pub fn find_parent_text(
         doc: &Document, 
         p_tag_name: &str, 
-        c_class_name: &str) -> Vec<String> {
+        c_class_name: &str
+    ) -> Vec<String> {
         let mut data = vec![];
         for node in doc.find(Name(p_tag_name)) {
             for n in node.children() {
@@ -71,7 +73,8 @@ pub mod scrape {
     /// ```
     pub fn find_all_text_by_class<'a>(
         doc: &'a Document, 
-        class_name: &'a str) -> Vec<String> {     
+        class_name: &'a str
+    ) -> Vec<String> {     
         let mut data = vec![];
         for node in doc.find(Class(class_name)) {
             data.push(node.text());     
@@ -94,7 +97,8 @@ pub mod scrape {
         doc: &Document, 
         p_tag_name: &str,
         c_class_name: &str, 
-        c_attr_name: &str) -> Vec<String> {
+        c_attr_name: &str
+    ) -> Vec<String> {
         let mut data = vec![];
         for node in doc.find(Name(p_tag_name)) {
             for n in node.children() {
