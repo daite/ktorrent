@@ -1,5 +1,6 @@
 ![build](https://github.com/daite/ktorrent-rs/workflows/Rust/badge.svg)
 [![Build Status](https://travis-ci.com/daite/ktorrent.svg?branch=main)](https://travis-ci.com/daite/ktorrent)
+![crates](https://img.shields.io/badge/crates.io-krorrent%20=%20%220.1.0%22-brightgreen.svg)
 # ktorrent
 > collect test data for scraping korean torrent sites.
 ## Status
