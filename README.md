@@ -3,7 +3,7 @@
 [![docs](https://docs.rs/ktorrent/badge.svg)](https://docs.rs/ktorrent)
 # ktorrent
 > Scraping korean torrent sites.
-# Example
+# example
 ```rust
 use reqwest;
 use reqwest::header::USER_AGENT;
@@ -26,7 +26,7 @@ fn main() {
     assert_eq!("magnet:?xt=urn:btih:dac87e714c3adf0fe073236ef32acafb6931ae63", result[1]);
 }
 ```
-## Status
+## status
 | No |      site     |             url             | status |
 |:--:|:-------------:|:---------------------------:|:------:|
 |  1 |    ttobogo    | https://ttobogo.net         |    O   |
