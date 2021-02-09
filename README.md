@@ -36,3 +36,5 @@ fn main() {
 |  5 | torrentview   | https://torrentview28.com  |    O   |
 |  6 | torrentsir   | https://torrentsir31.com |    O   |
 |  7 | torrentj   | https://torrentj32.com |    O   |
+|  8 | torrentqq   | https://torrentqq73.com |    O   |
+

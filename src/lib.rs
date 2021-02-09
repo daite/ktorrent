@@ -1,7 +1,7 @@
 //! # ktorrent
 //! 
 //! * ktorrent crate is only for scraping korean torrent sites.
-//! * it can get any data for links, titles, and magnet by scraping the sites.
+//! * it can get any data for bbs links, titles, and torrent magnets.
 pub use select::document::Document;
 pub use select::predicate::{Class, Name};
 pub use self::scrape::*;
@@ -84,15 +84,35 @@ pub mod scrape {
         }
         data
     }
+    /// it collects all texts by a p_tag_name & c_tag_name.
+    /// # html example
+    /// ```html
+    /// <tbody>
+    /// <li><strong>XXXX</strong>XXXX</li>
+    /// </tbody>
+    /// ```
+    pub fn find_all_text_by_tag<'a>(
+        doc: &'a Document, 
+        p_tag_name: &'a str,
+        c_tag_name: &'a str
+    ) -> Vec<String> {     
+        let mut data = vec![];
+        for node in doc.find(Name(p_tag_name)) {
+            if let Some(v) = node.find(Name(c_tag_name)).next() {
+                data.push(v.text());   
+            }  
+        }
+        data
+    }
     /// it collects a child attribute by a child class name.
     /// # html example
     /// ```html
     /// <td>
     ///   <a class="c_class_name" href="XXXX" onclick=XXXX>
-    ///   <span class="fa fa-cloud-download"></span>
+    ///   <span class="XXXX"></span>
     ///   </a>
     ///   <a class="c_class_name" href="XXXX onclick="XXXX rel="XXXX">
-    ///   <span class="fa fa-magnet"></span>
+    ///   <span class="XXXX"></span>
     ///   </a>
     /// </td>
     /// ```
@@ -122,8 +142,7 @@ mod tests {
     #[test]
     fn test_get_magnet_for_torrentsir() {
         let bbs_doc = Document::from(include_str!("./test_data/torrentsir_bbs.html"));
-        let data = find_child_attr_by_tag(
-            &bbs_doc, "list-group", "a", "href")[1];
+        let data = find_child_attr_by_tag(&bbs_doc, "list-group", "a", "href")[1];
         assert_eq!(
             "magnet:?xt=urn:btih:27646d3df274ed51b6386bd6aa40da849a73b341",
             data,
@@ -141,8 +160,7 @@ mod tests {
     #[test]
     fn test_get_get_bbs_url_for_torrentsir() {
         let search_doc = Document::from(include_str!("./test_data/torrentsir_search.html"));
-        let data = find_child_attr_by_tag(
-            &search_doc, "media-heading", "a", "href")[0];
+        let data = find_child_attr_by_tag(&search_doc, "media-heading", "a", "href")[0];
         assert_eq!(
             "./board.php?bo_table=entertain&wr_id=18170",
             data,
@@ -151,8 +169,7 @@ mod tests {
     #[test]
     fn test_get_magnet_for_torrentj() {
         let bbs_doc = Document::from(include_str!("./test_data/torrentj_bbs.html"));
-        let data = find_child_attr_by_tag(
-            &bbs_doc, "list-group", "a", "href")[1];
+        let data = find_child_attr_by_tag(&bbs_doc, "list-group", "a", "href")[1];
         assert_eq!(
             "magnet:?xt=urn:btih:27646d3df274ed51b6386bd6aa40da849a73b341",
             data,
@@ -170,8 +187,7 @@ mod tests {
     #[test]
     fn test_get_get_bbs_url_for_torrentj() {
         let search_doc = Document::from(include_str!("./test_data/torrentj_search.html"));
-        let data = find_child_attr_by_tag(
-            &search_doc, "media-heading", "a", "href")[0];
+        let data = find_child_attr_by_tag(&search_doc, "media-heading", "a", "href")[0];
         assert_eq!(
             "./board.php?bo_table=entertain&wr_id=18172",
             data,
@@ -189,8 +205,7 @@ mod tests {
     #[test]
     fn test_get_magnet_for_torrentview() {
         let bbs_doc = Document::from(include_str!("./test_data/torrentview_bbs.html"));
-        let data = find_child_attr_by_tag(
-            &bbs_doc, "list-group", "a", "href")[1];
+        let data = find_child_attr_by_tag(&bbs_doc, "list-group", "a", "href")[1];
         assert_eq!(
             "magnet:?xt=urn:btih:27646d3df274ed51b6386bd6aa40da849a73b341",
             data,
@@ -199,8 +214,7 @@ mod tests {
     #[test]
     fn test_get_get_bbs_url_for_torrentview() {
         let search_doc = Document::from(include_str!("./test_data/torrentview_search.html"));
-        let data = find_child_attr_by_tag(
-            &search_doc, "media-heading", "a", "href")[0];
+        let data = find_child_attr_by_tag(&search_doc, "media-heading", "a", "href")[0];
         assert_eq!(
             "./board.php?bo_table=enter&wr_id=21971",
             data,
@@ -218,8 +232,7 @@ mod tests {
     #[test]
     fn test_get_magnet_for_tshare() {
         let bbs_doc = Document::from(include_str!("./test_data/tshare_bbs.html"));
-        let data = find_child_attr_by_tag(
-            &bbs_doc, "board-view-torrent-info", "a", "href")[0];
+        let data = find_child_attr_by_tag(&bbs_doc, "board-view-torrent-info", "a", "href")[0];
         assert_eq!(
             "magnet:?xt=urn:btih:77c904927c0067cb3aadedae461e20c08eb11164",
             data,
@@ -228,8 +241,7 @@ mod tests {
     #[test]
     fn test_get_get_bbs_url_for_tshare() {
         let search_doc = Document::from(include_str!("./test_data/tshare_search.html"));
-        let data = find_child_attr_by_tag(
-            &search_doc, "list-item-row", "a", "href")[0];
+        let data = find_child_attr_by_tag(&search_doc, "list-item-row", "a", "href")[0];
         assert_eq!(
             "https://tshare.org/movie/11565",
             data,
@@ -247,8 +259,7 @@ mod tests {
     #[test]
     fn test_get_magnet_torrentmobile() {
         let bbs_doc = Document::from(include_str!("./test_data/torrentmobile_bbs.html"));
-        let data = find_child_attr_by_tag(
-            &bbs_doc, "list-group", "a", "href")[0];
+        let data = find_child_attr_by_tag(&bbs_doc, "list-group", "a", "href")[0];
         assert_eq!(
             "magnet:?xt=urn:btih:27646d3df274ed51b6386bd6aa40da849a73b341",
             data,
@@ -257,8 +268,7 @@ mod tests {
     #[test]
     fn test_get_get_bbs_url_for_torrentmobile() {
         let search_doc = Document::from(include_str!("./test_data/torrentmobile_search.html"));
-        let data = find_child_attr_by_tag(
-            &search_doc, "media-heading", "a", "href")[0];
+        let data = find_child_attr_by_tag(&search_doc, "media-heading", "a", "href")[0];
         assert_eq!(
             "./board.php?bo_table=music&wr_id=50564",
             data,
@@ -276,8 +286,7 @@ mod tests {
     #[test]
     fn test_get_magnet_ttobogo() {
         let bbs_doc = Document::from(include_str!("./test_data/ttobogo_bbs.html"));
-        let data = &find_child_attr_by_class(
-            &bbs_doc, "td", "btn btn-blue", "onclick")[0];
+        let data = &find_child_attr_by_class(&bbs_doc, "td", "btn btn-blue", "onclick")[0];
         assert_eq!(
             "file_download(\'magnet:?xt=urn:btih:27646d3df274ed51b6386bd6aa40da849a73b341\')",
             data,
@@ -286,8 +295,7 @@ mod tests {
     #[test]
     fn test_get_get_bbs_url_for_ttobogo() {
         let search_doc = Document::from(include_str!("./test_data/ttobogo_search.html"));
-        let data = &find_child_attr_by_class(
-            &search_doc, "div", "subject", "href")[0];
+        let data = &find_child_attr_by_class(&search_doc, "div", "subject", "href")[0];
         assert_eq!(
             "https://www1.ttobogo.net/post/192852",
             data,
@@ -305,8 +313,7 @@ mod tests {
     #[test]
     fn test_get_magnet_torrentsee() {
         let bbs_doc = Document::from(include_str!("./test_data/torrentsee_bbs.html"));
-        let data = &find_parent_text(
-            &bbs_doc, "td", "bbs_btn2")[1];
+        let data = &find_parent_text(&bbs_doc, "td", "bbs_btn2")[1];
         assert_eq!(
             "magnet:?xt=urn:btih:eee4d6fdf36ba112523cc48315ac5300cd84c77f",
             data.trim(),
@@ -319,6 +326,33 @@ mod tests {
         assert_eq!(
             "/topic/106593",
             data,
+        );
+    }
+    #[test]
+    fn test_get_title_for_torrentqq() {
+        let search_doc = Document::from(include_str!("./test_data/torrentqq_search.html"));
+        let data = find_child_attr_by_class(&search_doc, "div", "subject font-13 en", "title");
+        assert_eq!(
+            "동상이몽2 너는 내운명.E183.210208.720p-NEXT",
+            data[0],
+        );
+    }
+    #[test]
+    fn test_get_magnet_torrentqq() {
+        let bbs_doc = Document::from(include_str!("./test_data/torrentqq_bbs.html"));
+        let data = &find_all_text_by_tag(&bbs_doc, "tbody", "li")[0];
+        assert_eq!(
+            "Info Hash: cbed3a226963bba284cc056a4ee2e1257ff71725",
+            data,
+        );
+    }
+    #[test]
+    fn test_get_get_bbs_url_for_torrentqq() {
+        let search_doc = Document::from(include_str!("./test_data/torrentqq_search.html"));
+        let data = find_child_attr_by_class(&search_doc, "div", "subject font-13 en", "href");
+        assert_eq!(
+            "https://torrentqq73.com/torrent/med/400997.html",
+            data[0],
         );
     }
 }
