@@ -463,58 +463,58 @@ mod tests {
             data[0],   
         );
     }
-}
-#[test]
-fn test_get_title_for_torrentsome() {
-    let search_doc = Document::from(include_str!("./test_data/torrentsome_search.html"));
-    let data = find_all_text_by_class(&search_doc, "tit");
-    assert_eq!(
-        "동상이몽2너는내운명.E138.200323.720p-NEXT",
-        data[0].trim(),
-    );
-}
-#[test]
-fn test_get_magnet_for_torrentsome() {
-    let bbs_doc = Document::from(include_str!("./test_data/torrentsome_bbs.html"));
-    let data = find_child_attr_by_class(&bbs_doc, "td", "btn btn-info btn-sm", "href");
-    assert_eq!(
-        "magnet:?xt=urn:btih:53eccf3d953162d55ecbd698558beb927767a264",
-        data[1].trim(),
-    );
-}
-#[test]
-fn test_get_get_bbs_url_for_torrentsome() {
-    let search_doc = Document::from(include_str!("./test_data/torrentsome_search.html"));
-    let data = find_child_attr_by_tag(&search_doc, "table", "a", "href");
-    assert_eq!(
-        "/v/87009",
-        data[0],
-    );
-}
-#[test]
-fn test_get_magnet_for_jujutorrent() {
-    let bbs_doc = Document::from(include_str!("./test_data/jujutorrent_bbs.html"));
-    let data = find_child_attr_by_tag(&bbs_doc, "list-group", "a", "href")[1];
-    assert_eq!(
-        "magnet:?xt=urn:btih:cbed3a226963bba284cc056a4ee2e1257ff71725",
-        data,
-    );
-}
-#[test]
-fn test_get_get_title_for_jujutorrent() {
-    let search_doc = Document::from(include_str!("./test_data/jujutorrent_search.html"));
-    let data = find_parent_text(&search_doc, "b", "sch_word");
-    assert_eq!(
-        "동상이몽2 너는 내운명.E183.210208.720p-NEXT",
-        &data[0],
-    )
-}
-#[test]
-fn test_get_get_bbs_url_for_torrentsir() {
-    let search_doc = Document::from(include_str!("./test_data/jujutorrent_search.html"));
-    let data = find_child_attr_by_tag(&search_doc, "media-heading", "a", "href")[0];
-    assert_eq!(
-        "./board.php?bo_table=enter&wr_id=21575",
-        data,
-    );
+    #[test]
+    fn test_get_title_for_torrentsome() {
+        let search_doc = Document::from(include_str!("./test_data/torrentsome_search.html"));
+        let data = find_all_text_by_class(&search_doc, "tit");
+        assert_eq!(
+            "동상이몽2너는내운명.E138.200323.720p-NEXT",
+            data[0].trim(),
+        );
+    }
+    #[test]
+    fn test_get_magnet_for_torrentsome() {
+        let bbs_doc = Document::from(include_str!("./test_data/torrentsome_bbs.html"));
+        let data = find_child_attr_by_class(&bbs_doc, "td", "btn btn-info btn-sm", "href");
+        assert_eq!(
+            "magnet:?xt=urn:btih:53eccf3d953162d55ecbd698558beb927767a264",
+            data[1].trim(),
+        );
+    }
+    #[test]
+    fn test_get_get_bbs_url_for_torrentsome() {
+        let search_doc = Document::from(include_str!("./test_data/torrentsome_search.html"));
+        let data = find_child_attr_by_tag(&search_doc, "table", "a", "href");
+        assert_eq!(
+            "/v/87009",
+            data[0],
+        );
+    }
+    #[test]
+    fn test_get_magnet_for_jujutorrent() {
+        let bbs_doc = Document::from(include_str!("./test_data/jujutorrent_bbs.html"));
+        let data = find_child_attr_by_tag(&bbs_doc, "list-group", "a", "href")[1];
+        assert_eq!(
+            "magnet:?xt=urn:btih:cbed3a226963bba284cc056a4ee2e1257ff71725",
+            data,
+        );
+    }
+    #[test]
+    fn test_get_get_title_for_jujutorrent() {
+        let search_doc = Document::from(include_str!("./test_data/jujutorrent_search.html"));
+        let data = find_parent_text(&search_doc, "b", "sch_word");
+        assert_eq!(
+            "동상이몽2 너는 내운명.E183.210208.720p-NEXT",
+            &data[0],
+        )
+    }
+    #[test]
+    fn test_get_get_bbs_url_for_jujutorrent() {
+        let search_doc = Document::from(include_str!("./test_data/jujutorrent_search.html"));
+        let data = find_child_attr_by_tag(&search_doc, "media-heading", "a", "href")[0];
+        assert_eq!(
+            "./board.php?bo_table=enter&wr_id=21575",
+            data,
+        );
+    }
 }
