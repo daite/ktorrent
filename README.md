@@ -1,6 +1,6 @@
 ![build](https://github.com/daite/ktorrent-rs/workflows/Rust/badge.svg)
 [![Build Status](https://travis-ci.com/daite/ktorrent.svg?branch=main)](https://travis-ci.com/daite/ktorrent)
-[![docs](https://docs.rs/ktorrent/badge.svg?version=0.1.0)](https://docs.rs/ktorrent)
+[![docs](https://docs.rs/ktorrent/badge.svg)](https://docs.rs/ktorrent)
 # ktorrent
 > collect test data for scraping korean torrent sites.
 ## Status
