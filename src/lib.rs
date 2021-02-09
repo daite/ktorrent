@@ -257,7 +257,7 @@ mod tests {
         )
     }
     #[test]
-    fn test_get_magnet_torrentmobile() {
+    fn test_get_magnet_for_torrentmobile() {
         let bbs_doc = Document::from(include_str!("./test_data/torrentmobile_bbs.html"));
         let data = find_child_attr_by_tag(&bbs_doc, "list-group", "a", "href")[0];
         assert_eq!(
@@ -284,7 +284,7 @@ mod tests {
         )
     }
     #[test]
-    fn test_get_magnet_ttobogo() {
+    fn test_get_magnet_for_ttobogo() {
         let bbs_doc = Document::from(include_str!("./test_data/ttobogo_bbs.html"));
         let data = &find_child_attr_by_class(&bbs_doc, "td", "btn btn-blue", "onclick")[0];
         assert_eq!(
@@ -311,7 +311,7 @@ mod tests {
         )
     }
     #[test]
-    fn test_get_magnet_torrentsee() {
+    fn test_get_magnet_for_torrentsee() {
         let bbs_doc = Document::from(include_str!("./test_data/torrentsee_bbs.html"));
         let data = &find_parent_text(&bbs_doc, "td", "bbs_btn2")[1];
         assert_eq!(
@@ -338,7 +338,7 @@ mod tests {
         );
     }
     #[test]
-    fn test_get_magnet_torrentqq() {
+    fn test_get_magnet_for_torrentqq() {
         let bbs_doc = Document::from(include_str!("./test_data/torrentqq_bbs.html"));
         let data = &find_all_text_by_tag(&bbs_doc, "tbody", "li")[0];
         assert_eq!(
@@ -365,7 +365,7 @@ mod tests {
         );
     }
     #[test]
-    fn test_get_magnet_torrenttip() {
+    fn test_get_magnet_for_torrenttip() {
         let bbs_doc = Document::from(include_str!("./test_data/torrenttip_bbs.html"));
         let data = &find_all_text_by_tag(&bbs_doc, "tr", "td")[3];
         assert_eq!(
@@ -382,4 +382,139 @@ mod tests {
             data[0],
         );
     }
+    #[test]
+    fn test_get_title_for_torrentstory() {
+        let search_doc = Document::from(include_str!("./test_data/torrentstory_search.html"));
+        let data = find_all_text_by_class(&search_doc, "tit");
+        assert_eq!(
+            "동상이몽2 너는 내운명_E169_201102",
+            data[1].trim(),
+        );
+    }
+    #[test]
+    fn test_get_magnet_for_torrentstory() {
+        let bbs_doc = Document::from(include_str!("./test_data/torrentstory_bbs.html"));
+        let data = &find_all_text_by_tag(&bbs_doc, "tr", "td")[3];
+        assert_eq!(
+            "magnet:?xt=urn:btih:faa1e90dfae142711ece9d8fe236a738003496e8",
+            data.trim(),
+        );
+    }
+    #[test]
+    fn test_get_get_bbs_url_for_torrentstory() {
+        let search_doc = Document::from(include_str!("./test_data/torrentstory_search.html"));
+        let data = find_child_attr_by_tag(&search_doc, "body", "a", "href");
+        assert_eq!(
+            "/topic/92732",
+            data[0],
+        );
+    }
+    #[test]
+    fn test_get_magnet_for_torrentmax() {
+        let bbs_doc = Document::from(include_str!("./test_data/torrentmax_bbs.html"));
+        let data = find_child_attr_by_tag(&bbs_doc, "list-group", "a", "href")[1];
+        assert_eq!(
+            "magnet:?xt=urn:btih:cbed3a226963bba284cc056a4ee2e1257ff71725",
+            data,
+        );
+    }
+    #[test]
+    fn test_get_get_title_for_torrentmax() {
+        let search_doc = Document::from(include_str!("./test_data/torrentmax_search.html"));
+        let data = find_parent_text(&search_doc, "b", "sch_word");
+        assert_eq!(
+            "동상이몽2 너는 내운명.E183.210208.720p-NEXT",
+            &data[0],
+        )
+    }
+    #[test]
+    fn test_get_get_bbs_url_for_torrentmax() {
+        let search_doc = Document::from(include_str!("./test_data/torrentmax_search.html"));
+        let data = find_child_attr_by_tag(&search_doc, "media-heading", "a", "href")[0];
+        assert_eq!(
+            "https://torrentmax15.com/max/VARIETY/23713",
+            data,
+        );
+    }
+    #[test]
+    fn test_get_get_title_for_torrentplay() {
+        let search_doc = Document::from(include_str!("./test_data/torrentplay_search.html"));
+        let data = find_parent_text(&search_doc, "a", "sch_word");
+        assert_eq!(
+            "동상이몽2 너는 내운명.E183.210208.720p-NEXT",
+            &data[0],
+        )
+    }
+    #[test]
+    fn test_get_get_bbs_url_for_torrentplay() {
+        let search_doc = Document::from(include_str!("./test_data/torrentplay_search.html"));
+        let data = find_child_attr_by_tag(&search_doc, "sch_tit", "a", "href")[0];
+        assert_eq!(
+            "https://torrentplay10.com/entertainment/21510",
+            data,
+        );
+    }
+    #[test]
+    fn test_get_magnet_for_torrentplay() {
+        let bbs_doc = Document::from(include_str!("./test_data/torrentplay_bbs.html"));
+        let data = find_child_attr_by_tag(&bbs_doc, "margnet-link", "a", "href");
+        assert_eq!(
+            "magnet:?xt=urn:btih:cbed3a226963bba284cc056a4ee2e1257ff71725",
+            data[0],   
+        );
+    }
+}
+#[test]
+fn test_get_title_for_torrentsome() {
+    let search_doc = Document::from(include_str!("./test_data/torrentsome_search.html"));
+    let data = find_all_text_by_class(&search_doc, "tit");
+    assert_eq!(
+        "동상이몽2너는내운명.E138.200323.720p-NEXT",
+        data[0].trim(),
+    );
+}
+#[test]
+fn test_get_magnet_for_torrentsome() {
+    let bbs_doc = Document::from(include_str!("./test_data/torrentsome_bbs.html"));
+    let data = find_child_attr_by_class(&bbs_doc, "td", "btn btn-info btn-sm", "href");
+    assert_eq!(
+        "magnet:?xt=urn:btih:53eccf3d953162d55ecbd698558beb927767a264",
+        data[1].trim(),
+    );
+}
+#[test]
+fn test_get_get_bbs_url_for_torrentsome() {
+    let search_doc = Document::from(include_str!("./test_data/torrentsome_search.html"));
+    let data = find_child_attr_by_tag(&search_doc, "table", "a", "href");
+    assert_eq!(
+        "/v/87009",
+        data[0],
+    );
+}
+#[test]
+fn test_get_magnet_for_jujutorrent() {
+    let bbs_doc = Document::from(include_str!("./test_data/jujutorrent_bbs.html"));
+    let data = find_child_attr_by_tag(&bbs_doc, "list-group", "a", "href")[1];
+    assert_eq!(
+        "magnet:?xt=urn:btih:cbed3a226963bba284cc056a4ee2e1257ff71725",
+        data,
+    );
+}
+#[test]
+fn test_get_get_title_for_jujutorrent() {
+    let search_doc = Document::from(include_str!("./test_data/jujutorrent_search.html"));
+    let data = find_parent_text(&search_doc, "b", "sch_word");
+    assert_eq!(
+        "동상이몽2 너는 내운명.E183.210208.720p-NEXT",
+        &data[0],
+    )
+}
+#[test]
+fn test_get_get_bbs_url_for_torrentsir() {
+    let search_doc = Document::from(include_str!("./test_data/jujutorrent_search.html"));
+    let data = find_child_attr_by_tag(&search_doc, "media-heading", "a", "href")[0];
+    assert_eq!(
+        "./board.php?bo_table=enter&wr_id=21575",
+        data,
+    );
 }

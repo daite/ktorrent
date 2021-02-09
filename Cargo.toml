@@ -1,6 +1,6 @@
 [package]
 name = "ktorrent"
-version = "0.1.2"
+version = "0.2.0"
 authors = ["daite <blueskykind02@yahoo.co.jp>"]
 edition = "2018"
 description = "ktorrent crate is only for scraping korean torrent sites"

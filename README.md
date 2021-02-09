@@ -1,8 +1,9 @@
 ![build](https://github.com/daite/ktorrent-rs/workflows/Rust/badge.svg)
 [![Build Status](https://travis-ci.com/daite/ktorrent.svg?branch=main)](https://travis-ci.com/daite/ktorrent)
-[![docs](https://docs.rs/ktorrent/badge.svg)](https://docs.rs/ktorrent)
+[![crates.io](https://img.shields.io/crates/v/ktorrent.svg)](https://crates.io/crates/ktorrent)
+[![docs](https://docs.rs/ktorrent/badge.svg)](https://docs.rs/ktorrent) 
 # ktorrent
-> Scraping korean torrent sites.
+> scraping korean torrent sites.
 # example
 ```rust
 use reqwest;
@@ -38,4 +39,8 @@ fn main() {
 |  7 | torrentj   | https://torrentj32.com |    O   |
 |  8 | torrentqq   | https://torrentqq73.com |    O   |
 |  9 | torrenttip   | https://torrenttip19.com |    O   |
-
+|  10 | torrentstory   | https://torrentstory13.com |    O   |
+|  11 | torrentmax  | https://torrentmax15.com |    O   |
+|  12 | torrentplay  | https://torrentplay10.com |    O   |
+|  13 | torrentsome  | https://torrentsome1.com |    O   |
+|  14 | jujutorrent  | https://jujutorrent28.com |    O   |
