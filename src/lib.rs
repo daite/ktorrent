@@ -15,7 +15,7 @@ pub use scrape::*;
 pub mod scrape {
     use super::*;
     /// it collects a child attribute by a child tag name.
-	/// <li class="p_class_name">
+    /// <li class="p_class_name">
     ///     <i class="c_class_name"></i> 
     ///     <c_tag_name c_attr_name=c_attr_name>xxx</a>
     /// </li>
@@ -70,14 +70,14 @@ pub mod scrape {
         data
     }
     /// it collects a child attribute by a child class name.
-    ///<td>
-    ///<a class="class_name" href="XXXX" onclick=XXXX>
-    ///<span class="fa fa-cloud-download"></span>
-    ///</a>
-    ///<a class="class_name" href="XXXX onclick="XXXX rel="XXXX">
-    ///<span class="fa fa-magnet"></span>
-    //</a>
-    //</td>
+    /// <td>
+    /// <a class="class_name" href="XXXX" onclick=XXXX>
+    /// <span class="fa fa-cloud-download"></span>
+    /// </a>
+    /// <a class="class_name" href="XXXX onclick="XXXX rel="XXXX">
+    /// <span class="fa fa-magnet"></span>
+    /// </a>
+    /// </td>
     pub fn find_child_attr_by_class(
         doc: &Document, 
         p_tag_name: &str,
