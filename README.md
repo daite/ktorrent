@@ -3,6 +3,29 @@
 [![docs](https://docs.rs/ktorrent/badge.svg)](https://docs.rs/ktorrent)
 # ktorrent
 > collect test data for scraping korean torrent sites.
+# Example
+```rust
+use reqwest;
+use reqwest::header::USER_AGENT;
+use ktorrent::Document;
+use ktorrent::find_child_attr_by_tag;
+
+fn main() {
+    let url = "https://torrentsir31.com/bbs/board.php?bo_table=movie&wr_id=15846";
+    let client = reqwest::blocking::Client::new();
+    let res = client.get(url)
+                    .header(USER_AGENT, "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_0)")
+                    .send().unwrap();
+    let doc = Document::from_read(res).unwrap();
+    let result = find_child_attr_by_tag(
+                  &doc, 
+                  "list-group", 
+                  "a", 
+                  "href"
+                );
+    assert_eq!("magnet:?xt=urn:btih:dac87e714c3adf0fe073236ef32acafb6931ae63", result[1]);
+}
+```
 ## Status
 | No |      site     |             url             | status |
 |:--:|:-------------:|:---------------------------:|:------:|
